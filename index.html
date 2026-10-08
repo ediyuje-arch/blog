@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Pembelajaran Interaktif PID - Blog Informatif, Kreatif & Beretika</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    .touch-card {
+      transition: all 0.2s ease;
+    }
+    .touch-card:active {
+      transform: scale(0.97);
+    }
+    /* Custom Scrollbar for PID */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+    /* Spin Wheel Animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP BAR / HEADER PID -->
+  <header class="bg-indigo-900 text-white px-6 py-3 shadow-lg flex justify-between items-center sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <div class="bg-amber-400 text-indigo-950 font-black px-3 py-1.5 rounded-lg text-lg flex items-center gap-2 shadow">
+        <i data-lucide="monitor" class="w-6 h-6"></i> PID MODE
+      </div>
+      <div>
+        <h1 class="text-xl font-extrabold tracking-wide text-amber-300">MEDIA PEMBELAJARAN INTERAKTIF INFORMATIKA</h1>
+        <p class="text-xs text-indigo-200">Kelas IX (Fase D) • Memilih & Membuat Blog Informatif, Kreatif, dan Beretika</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <button onclick="toggleFullScreen()" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-950 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 border border-indigo-600 transition">
+        <i data-lucide="maximize" class="w-5 h-5"></i>
+        <span>Layar Penuh</span>
+      </button>
+      <div id="clock" class="bg-indigo-950 text-amber-400 font-mono font-bold px-4 py-2 rounded-xl text-sm border border-indigo-800 shadow-inner">
+        00:00:00
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="bg-white border-b border-slate-200 px-6 py-2 shadow-sm sticky top-[68px] z-40">
+    <div class="flex gap-2 max-w-7xl mx-auto overflow-x-auto pb-1">
+      <button onclick="switchTab('tab-overview')" id="btn-tab-overview" class="tab-btn bg-indigo-600 text-white font-bold px-5 py-3 rounded-xl flex items-center gap-2 shadow-sm whitespace-nowrap text-base transition">
+        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+        <span> Beranda & Alur</span>
+      </button>
+      <button onclick="switchTab('tab-modul1')" id="btn-tab-modul1" class="tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 whitespace-nowrap text-base transition">
+        <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i>
+        <span> Modul 1: Memahami</span>
+      </button>
+      <button onclick="switchTab('tab-modul2')" id="btn-tab-modul2" class="tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 whitespace-nowrap text-base transition">
+        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+        <span> Modul 2: Mengaplikasi</span>
+      </button>
+      <button onclick="switchTab('tab-modul3')" id="btn-tab-modul3" class="tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 whitespace-nowrap text-base transition">
+        <i data-lucide="sparkles" class="w-5 h-5 text-amber-600"></i>
+        <span> Modul 3: Merefleksi</span>
+      </button>
+      <button onclick="switchTab('tab-panduan')" id="btn-tab-panduan" class="tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 whitespace-nowrap text-base transition">
+        <i data-lucide="user-check" class="w-5 h-5 text-purple-600"></i>
+        <span> Panduan Guru</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- ==================== TAB: OVERVIEW & ALUR DEEP LEARNING ==================== -->
+    <section id="tab-overview" class="tab-content block space-y-6">
+      <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden border border-indigo-700">
+        <div class="relative z-10 max-w-3xl">
+          <span class="bg-amber-400 text-indigo-950 font-black px-4 py-1.5 rounded-full text-xs uppercase tracking-wider mb-4 inline-block">
+            Informatika SMP - Kelas 9 / Fase D
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mb-3 leading-tight text-white">
+            Membuat Blog sebagai Produk Digital yang Informatif, Kreatif, dan Beretika
+          </h2>
+          <p class="text-indigo-200 text-base leading-relaxed mb-6">
+            Media Pembelajaran Interaktif berbasis Panel Interaktif Digital (PID) dirancang untuk mengaktifkan kolaborasi fisik, berpikir kritis, verifikasi informasi, serta kreasi produk digital positif melalui pendekatan <strong class="text-amber-300">Deep Learning (Memahami, Mengaplikasi, Merefleksi)</strong>.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="switchTab('tab-modul1')" class="bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg flex items-center gap-2 text-lg touch-card">
+              <i data-lucide="play-circle" class="w-6 h-6"></i>
+              Mulai Pembelajaran
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALUR TRIO DEEP LEARNING CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl border-2 border-indigo-200 shadow-sm hover:shadow-md transition">
+          <div class="w-14 h-14 bg-indigo-100 text-indigo-700 rounded-2xl flex items-center justify-center font-black text-2xl mb-4">
+            1
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Memahami (Understanding)</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Mengenali fungsi, jenis-jenis konten blog, serta anatomi postingan blog yang baik melalui eksplorasi visual interaktif.
+          </p>
+          <ul class="text-xs text-indigo-900 space-y-1.5 font-semibold bg-indigo-50 p-3 rounded-xl">
+            <li>✓ Permainan "Sort & Match Jenis Blog"</li>
+            <li>✓ Hotspot Anatomi Postingan Interaktif</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-sm hover:shadow-md transition">
+          <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center font-black text-2xl mb-4">
+            2
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Mengaplikasi (Applying)</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Melatih kemampuan verifikasi berita (anti-hoaks), etika hak cipta digital, serta menyusun draf proyek blog secara terstruktur.
+          </p>
+          <ul class="text-xs text-emerald-900 space-y-1.5 font-semibold bg-emerald-50 p-3 rounded-xl">
+            <li>✓ Simulasi Detektif Informasi (Valid/Hoaks)</li>
+            <li>✓ Kuis Dilema Etika Digital & Hak Cipta</li>
+            <li>✓ Dashboard Project Roadmap (PjBL)</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-amber-200 shadow-sm hover:shadow-md transition">
+          <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center font-black text-2xl mb-4">
+            3
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Merefleksi (Reflecting)</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Mengevaluasi karya kelompok lain secara jujur dan santun, serta melakukan refleksi berkesadaran terhadap proses belajar.
+          </p>
+          <ul class="text-xs text-amber-900 space-y-1.5 font-semibold bg-amber-50 p-3 rounded-xl">
+            <li>✓ Roda Keberuntungan (Spin Wheel) Presentasi</li>
+            <li>✓ Penilaian Sejawat (Peer-Review Rating)</li>
+            <li>✓ Kanvas Refleksi Sticky Notes 3-2-1</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: MODUL 1 (MEMAHAMI) ==================== -->
+    <section id="tab-modul1" class="tab-content hidden space-y-8">
+      
+      <!-- SUB-MODUL 1A: SORT & MATCH GAME -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-slate-100 pb-4">
+          <div>
+            <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Permainan Interaktif PID #1</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Sort & Match: Klasifikasi Jenis Konten Blog</h2>
+            <p class="text-slate-600 text-sm">Petunjuk: Bawa siswa ke depan PID. Sentuh kartu di bawah, lalu sentuh keranjang tujuan yang tepat!</p>
+          </div>
+          <div class="flex items-center gap-3 bg-indigo-50 p-3 rounded-2xl border border-indigo-100">
+            <span class="text-xs font-bold text-indigo-800">Skor Kelompok:</span>
+            <span id="game1-score" class="text-2xl font-black text-indigo-600">0 / 6</span>
+            <button onclick="resetGame1()" class="ml-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl touch-card">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- BASKET TARGETS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <!-- Basket 1 -->
+          <div onclick="dropToBasket('berita')" class="basket-target bg-blue-50 border-3 border-dashed border-blue-400 hover:border-blue-600 rounded-2xl p-4 min-h-[160px] flex flex-col items-center justify-start text-center cursor-pointer transition">
+            <div class="bg-blue-600 text-white font-extrabold px-4 py-1.5 rounded-xl text-sm mb-2 shadow">
+              📦 Berita & Informasi
+            </div>
+            <p class="text-xs text-blue-700 mb-3">Artikel factual, pengumuman resmi, atau kabar terkini.</p>
+            <div id="basket-berita" class="w-full space-y-2"></div>
+          </div>
+
+          <!-- Basket 2 -->
+          <div onclick="dropToBasket('tips')" class="basket-target bg-emerald-50 border-3 border-dashed border-emerald-400 hover:border-emerald-600 rounded-2xl p-4 min-h-[160px] flex flex-col items-center justify-start text-center cursor-pointer transition">
+            <div class="bg-emerald-600 text-white font-extrabold px-4 py-1.5 rounded-xl text-sm mb-2 shadow">
+              📦 Tips & Panduan Praktis
+            </div>
+            <p class="text-xs text-emerald-700 mb-3">Langkah-langkah, tutorial, atau panduan penyelesaian masalah.</p>
+            <div id="basket-tips" class="w-full space-y-2"></div>
+          </div>
+
+          <!-- Basket 3 -->
+          <div onclick="dropToBasket('cerita')" class="basket-target bg-purple-50 border-3 border-dashed border-purple-400 hover:border-purple-600 rounded-2xl p-4 min-h-[160px] flex flex-col items-center justify-start text-center cursor-pointer transition">
+            <div class="bg-purple-600 text-white font-extrabold px-4 py-1.5 rounded-xl text-sm mb-2 shadow">
+              📦 Cerita & Pengalaman
+            </div>
+            <p class="text-xs text-purple-700 mb-3">Opini pribadi, catatan perjalanan, dan refleksi pengalaman.</p>
+            <div id="basket-cerita" class="w-full space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- CARDS TO SORT -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Kartu Konten yang Harus Dipilih (Sentuh Kartu Dulu, Lalu Sentuh Keranjang):</h4>
+          <div id="cards-pool" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Cards generated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-MODUL 1B: HOTSPOT ANATOMI BLOG -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Fitur Interaktif PID #2</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Eksplorasi Hotspot: 6 Unsur Anatomi Postingan Blog</h2>
+          <p class="text-slate-600 text-sm">Sentuh ikon angka lingkaran berkedip pada ilustrasi blog di bawah untuk membuka penjelasan terperinci!</p>
+        </div>
+
+        <!-- BLOG MOCKUP WITH HOTSPOTS -->
+        <div class="bg-slate-900 p-4 sm:p-6 rounded-3xl shadow-xl max-w-4xl mx-auto text-slate-800">
+          <!-- Browser Header Bar -->
+          <div class="bg-slate-800 px-4 py-2 rounded-t-2xl flex items-center gap-2 mb-4">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
+              <span class="w-3 h-3 bg-amber-500 rounded-full inline-block"></span>
+              <span class="w-3 h-3 bg-emerald-500 rounded-full inline-block"></span>
+            </div>
+            <div class="bg-slate-700 text-slate-300 text-xs px-4 py-1 rounded-lg flex-1 text-center font-mono">
+              https://blog-sekolahku.id/tips-kebersihan-sekolah
+            </div>
+          </div>
+
+          <!-- Blog Content Container -->
+          <div class="bg-white p-6 sm:p-8 rounded-b-2xl relative space-y-6">
+            
+            <!-- HOTSPOT 1: HEADER & VISUAL -->
+            <div class="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-2xl flex flex-col justify-end min-h-[160px] shadow">
+              <button onclick="openHotspot(1)" class="absolute top-3 right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                1
+              </button>
+              <p class="text-xs font-semibold text-blue-200">Kategori: Lingkungan & Literasi Digital</p>
+              <span class="text-sm font-bold opacity-80">[Visual Header Pemikat yang Relevan]</span>
+            </div>
+
+            <!-- HOTSPOT 2: JUDUL -->
+            <div class="relative bg-amber-50 p-4 rounded-xl border border-amber-200">
+              <button onclick="openHotspot(2)" class="absolute -top-3 -right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                2
+              </button>
+              <h3 class="text-2xl font-black text-slate-900">5 Langkah Nyata Siswa SMP Menjaga Kebersihan Lingkungan Sekolah</h3>
+            </div>
+
+            <!-- HOTSPOT 3: PARAGRAF PEMBUKA -->
+            <div class="relative bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <button onclick="openHotspot(3)" class="absolute -top-3 -right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                3
+              </button>
+              <p class="text-sm text-slate-700 italic">
+                "Apakah kamu tahu bahwa sekolah yang bersih membuat pikiran kita lebih segar saat belajar? Mari kita bahas lima kebiasaan kecil yang berdampak besar..."
+              </p>
+            </div>
+
+            <!-- HOTSPOT 4: ISI UTAMA & POIN -->
+            <div class="relative bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+              <button onclick="openHotspot(4)" class="absolute -top-3 -right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                4
+              </button>
+              <h4 class="font-bold text-sm text-slate-800">1. Memilah Sampah Sesuai Jenisnya</h4>
+              <p class="text-xs text-slate-600">Sediakan wadah organik dan anorganik di depan kelas...</p>
+              <h4 class="font-bold text-sm text-slate-800">2. Menerapkan Piket Kelas Secara Konsisten</h4>
+              <p class="text-xs text-slate-600">Kerja sama antaranggota kelompok piket akan mempercepat penyelesaian tugas...</p>
+            </div>
+
+            <!-- HOTSPOT 5: PENUTUP -->
+            <div class="relative bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <button onclick="openHotspot(5)" class="absolute -top-3 -right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                5
+              </button>
+              <p class="text-xs text-slate-700 font-medium">
+                <strong>Kesimpulan:</strong> Menjaga kebersihan adalah tanggung jawab bersama. Yuk, mulai langkah kecilmu hari ini di kelas!
+              </p>
+            </div>
+
+            <!-- HOTSPOT 6: ATRIBUSI & REFERENSI -->
+            <div class="relative bg-indigo-50 p-4 rounded-xl border border-indigo-200 text-xs text-indigo-900">
+              <button onclick="openHotspot(6)" class="absolute -top-3 -right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg border-2 border-white animate-bounce touch-card">
+                6
+              </button>
+              <p><strong>Sumber Referensi:</strong> Panduan Sekolah Adiwiyata Kemendikbudristek (2024)</p>
+              <p><strong>Kredit Gambar:</strong> Foto oleh Budi Santoso / Dokumentasi OSIS SMPN 1 (Lisensi CC-BY)</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: MODUL 2 (MENGAPLIKASI) ==================== -->
+    <section id="tab-modul2" class="tab-content hidden space-y-8">
+      
+      <!-- SUB-MODUL 2A: DETEKTIF INFORMASI -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Simulasi Interaktif PID #3</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Detektif Informasi: Uji Kredibilitas Artikel (Valid vs Hoaks)</h2>
+          <p class="text-slate-600 text-sm">Gunakan tiga lensa detektif di bawah untuk menganalisis dua artikel blog yang memuat klaim berbeda!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Artikel A -->
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4 relative">
+            <div class="flex justify-between items-center">
+              <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-lg text-xs">Artikel Kasus A</span>
+              <span id="stamp-a" class="hidden text-xs font-black px-3 py-1 rounded-lg border-2 uppercase"></span>
+            </div>
+            <h3 class="font-extrabold text-lg text-slate-900">"Siswa SMP Jepara Ciptakan Alat Pengolah Sampah Otomatis Berbasis IoT"</h3>
+            <div class="text-xs text-slate-500 space-y-1">
+              <p>📍 <strong>Penulis:</strong> Ahmad Rian, S.Kom. (Guru Pendamping Ekstrakurikuler)</p>
+              <p>📍 <strong>Tanggal:</strong> 12 Februari 2026</p>
+              <p>📍 <strong>Sumber Data:</strong> Dinas Lingkungan Hidup Kabupaten Jepara & Wawancara Kepala Sekolah</p>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed bg-white p-3 rounded-xl border border-slate-200">
+              Inovasi pengolahan sampah ini telah diuji coba selama tiga bulan di laboratorium sekolah dan terbukti mengurai sampah organik 50% lebih cepat. Dokumentasi dan data pengukuran dilampirkan secara transparan.
+            </p>
+            <div class="flex gap-2">
+              <button onclick="investigate('A', 'valid')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 touch-card">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i> Stempel Terverifikasi Valid
+              </button>
+              <button onclick="investigate('A', 'hoax')" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 touch-card">
+                <i data-lucide="x-circle" class="w-4 h-4"></i> Stempel Tidak Kredibel / Hoaks
+              </button>
+            </div>
+          </div>
+
+          <!-- Artikel B -->
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4 relative">
+            <div class="flex justify-between items-center">
+              <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-lg text-xs">Artikel Kasus B</span>
+              <span id="stamp-b" class="hidden text-xs font-black px-3 py-1 rounded-lg border-2 uppercase"></span>
+            </div>
+            <h3 class="font-extrabold text-lg text-slate-900">"GEMPAR!! Makanan Cepat Saji Menyebabkan Otak Manusia Berubah Menjadi Batu!!"</h3>
+            <div class="text-xs text-slate-500 space-y-1">
+              <p>📍 <strong>Penulis:</strong> AdminX (Tidak dicantumkan nama asli)</p>
+              <p>📍 <strong>Tanggal:</strong> Tidak diketahui</p>
+              <p>📍 <strong>Sumber Data:</strong> "Kata Orang-Orang di Internet"</p>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed bg-white p-3 rounded-xl border border-slate-200">
+              Sebarkan kabar ini sebelum dihapus oleh pemerintah! Riset rahasia membuktikan siapa saja yang makan junk food akan mengalami pengeras otak instan dalam waktu 24 jam!
+            </p>
+            <div class="flex gap-2">
+              <button onclick="investigate('B', 'valid')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 touch-card">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i> Stempel Terverifikasi Valid
+              </button>
+              <button onclick="investigate('B', 'hoax')" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 touch-card">
+                <i data-lucide="x-circle" class="w-4 h-4"></i> Stempel Tidak Kredibel / Hoaks
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-MODUL 2B: DILEMA ETIKA DIGITAL -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Kuis Interaktif PID #4</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Studi Kasus Dilema Etika Digital & Hak Cipta</h2>
+          <p class="text-slate-600 text-sm">Bacalah skenario di bawah ini lalu tentukan tindakan paling beretika dengan menekan opsi jawaban pada layar PID!</p>
+        </div>
+
+        <div class="bg-purple-50 p-6 rounded-2xl border border-purple-200 space-y-4">
+          <div class="flex items-center gap-2 text-purple-900 font-extrabold text-base">
+            <i data-lucide="help-circle" class="w-6 h-6 text-purple-600"></i>
+            <span>Skenario Studi Kasus:</span>
+          </div>
+          <p class="text-slate-800 text-sm leading-relaxed font-medium">
+            "Kelompokmu membutuhkan foto pendukung untuk artikel blog tentang kegiatan Pramuka Sekolah. Di mesin pencari internet, kamu menemukan foto sangat bagus buatan alumni sekolah tanpa keterangan lisensi. Apa tindakan yang paling beretika?"
+          </p>
+
+          <div class="space-y-3 pt-2">
+            <button onclick="answerEtika('A')" class="w-full text-left bg-white hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 font-semibold text-slate-800 text-sm transition touch-card flex items-start gap-3">
+              <span class="bg-purple-200 text-purple-900 font-black px-2.5 py-1 rounded-lg text-xs">A</span>
+              <span>Langsung mengunduh dan menyalin foto tersebut ke blog tanpa meminta izin atau mencantumkan sumber karena foto itu buatan alumni sekolah sendiri.</span>
+            </button>
+
+            <button onclick="answerEtika('B')" class="w-full text-left bg-white hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 font-semibold text-slate-800 text-sm transition touch-card flex items-start gap-3">
+              <span class="bg-purple-200 text-purple-900 font-black px-2.5 py-1 rounded-lg text-xs">B</span>
+              <span>Meminta izin kepada alumni/pencipta foto atau mencari gambar berlisensi bebas (Creative Commons) serta mencantumkan atribusi pencipta secara jelas.</span>
+            </button>
+
+            <button onclick="answerEtika('C')" class="w-full text-left bg-white hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 font-semibold text-slate-800 text-sm transition touch-card flex items-start gap-3">
+              <span class="bg-purple-200 text-purple-900 font-black px-2.5 py-1 rounded-lg text-xs">C</span>
+              <span>Mengedit sedikit filter warna foto tersebut lalu mengklaimnya sebagai foto hasil buatan kelompok sendiri agar tidak perlu mencantumkan sumber.</span>
+            </button>
+          </div>
+
+          <div id="etika-feedback" class="hidden p-4 rounded-xl font-medium text-sm mt-4"></div>
+        </div>
+      </div>
+
+      <!-- SUB-MODUL 2C: DASHBOARD PROJECT ROADMAP (PjBL) -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Papan Pelacak Proyek PID #5</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Dashboard Project Roadmap Blog Kelompok</h2>
+          <p class="text-slate-600 text-sm">Perwakilan kelompok dapat maju ke layar PID untuk mencentang langkah proyek yang telah diselesaikan!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Step 1 -->
+          <div onclick="toggleStep(1)" id="step-1" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 1</span>
+              <div id="check-1" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Pemilihan Tema Blog</h4>
+            <p class="text-xs text-slate-500 mt-1">Sepakati tema informatif (misal: Edukasi Sampah, Teknologi SMP, Budaya Jepara).</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div onclick="toggleStep(2)" id="step-2" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 2</span>
+              <div id="check-2" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Penentuan Audiens Target</h4>
+            <p class="text-xs text-slate-500 mt-1">Tentukan siapa pembaca utama (Teman Sebaya, Guru, Masyarakat Umum).</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div onclick="toggleStep(3)" id="step-3" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 3</span>
+              <div id="check-3" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Penyusunan Judul Menarik</h4>
+            <p class="text-xs text-slate-500 mt-1">Buat judul yang informatif, jelas, dan bebas dari jebakan clickbait.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div onclick="toggleStep(4)" id="step-4" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 4</span>
+              <div id="check-4" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Penulisan Draf Konten Utama</h4>
+            <p class="text-xs text-slate-500 mt-1">Susun kalimat pembuka, isi berpoin, serta kesimpulan yang santun.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div onclick="toggleStep(5)" id="step-5" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 5</span>
+              <div id="check-5" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Pemilihan Gambar & Atribusi</h4>
+            <p class="text-xs text-slate-500 mt-1">Pilih visual berkualitas dan tuliskan kredit pembuat foto dengan jelas.</p>
+          </div>
+
+          <!-- Step 6 -->
+          <div onclick="toggleStep(6)" id="step-6" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 6</span>
+              <div id="check-6" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Verifikasi Sumber Referensi</h4>
+            <p class="text-xs text-slate-500 mt-1">Pastikan fakta dan tautan sumber terpercaya sudah tercantum.</p>
+          </div>
+
+          <!-- Step 7 -->
+          <div onclick="toggleStep(7)" id="step-7" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 7</span>
+              <div id="check-7" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Uji Tampilan (Lay Out)</h4>
+            <p class="text-xs text-slate-500 mt-1">Periksa keterbacaan tulisan, tata letak gambar, serta kerapian artikel.</p>
+          </div>
+
+          <!-- Step 8 -->
+          <div onclick="toggleStep(8)" id="step-8" class="cursor-pointer bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl transition hover:border-indigo-400 touch-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-slate-400">LANGKAH 8</span>
+              <div id="check-8" class="w-6 h-6 border-2 border-slate-300 rounded-lg flex items-center justify-center text-white font-bold text-xs"></div>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">Finalisasi & Publikasi Blog</h4>
+            <p class="text-xs text-slate-500 mt-1">Lakukan revisi akhir dan siap dipresentasikan di depan kelas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: MODUL 3 (MEREFLEKSI) ==================== -->
+    <section id="tab-modul3" class="tab-content hidden space-y-8">
+      
+      <!-- SUB-MODUL 3A: RODA KEBERUNTUNGAN PRESENTASI -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Permainan Interaktif PID #6</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Roda Keberuntungan Spin Wheel (Penentuan Presentasi Kelompok)</h2>
+          <p class="text-slate-600 text-sm">Sentuh tombol PUTAR RODA di layar PID untuk memilih kelompok yang akan tampil!</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+          <!-- Wheel Canvas Container -->
+          <div class="relative flex flex-col items-center">
+            <!-- Indicator Arrow -->
+            <div class="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[30px] border-t-rose-600 z-10 -mb-4 shadow"></div>
+            <canvas id="wheelCanvas" width="340" height="340" class="rounded-full shadow-2xl border-4 border-slate-800"></canvas>
+            
+            <button onclick="spinWheel()" id="spin-btn" class="mt-6 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-lg px-8 py-4 rounded-2xl shadow-xl border-2 border-amber-300 touch-card flex items-center gap-2">
+              <i data-lucide="rotate-cw" class="w-6 h-6"></i> PUTAR RODA!
+            </button>
+          </div>
+
+          <!-- Winner Announcement Display -->
+          <div class="bg-slate-900 text-white p-6 rounded-3xl border-2 border-amber-400 shadow-2xl flex flex-col items-center justify-center text-center min-w-[280px] min-h-[220px]">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">Gilirannya Presentasi:</span>
+            <div id="winner-display" class="text-3xl font-black text-amber-300 my-2">???</div>
+            <p id="winner-sub" class="text-xs text-slate-400 max-w-[200px]">Siapkan draf blog kelompokmu untuk ditampilkan di layar PID!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-MODUL 3B: PEER REVIEW RATING BINTANG -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Evaluasi Sejawat PID #7</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Lembar Penilaian Sejawat (Peer-Review Rating)</h2>
+          <p class="text-slate-600 text-sm">Audien maju ke layar PID untuk memberikan Bintang Rating (1–5) pada karya kelompok tampil!</p>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Criteria 1 -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+              <h4 class="font-bold text-sm text-slate-800 mb-1">1. Kesesuaian Tema & Audiens</h4>
+              <p class="text-xs text-slate-500 mb-3">Artikel informatif dan cocok dibaca oleh siswa SMP.</p>
+              <div class="flex gap-2" id="star-c1">
+                <!-- Stars rendered via JS -->
+              </div>
+            </div>
+
+            <!-- Criteria 2 -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+              <h4 class="font-bold text-sm text-slate-800 mb-1">2. Kejelasan & Keakuratan Isi</h4>
+              <p class="text-xs text-slate-500 mb-3">Fakta jelas, tidak mengandung hoaks atau menyesatkan.</p>
+              <div class="flex gap-2" id="star-c2"></div>
+            </div>
+
+            <!-- Criteria 3 -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+              <h4 class="font-bold text-sm text-slate-800 mb-1">3. Kerapian Lay Out & Visual</h4>
+              <p class="text-xs text-slate-500 mb-3">Tata letak rapi, gambar menarik dan mendukung tulisan.</p>
+              <div class="flex gap-2" id="star-c3"></div>
+            </div>
+
+            <!-- Criteria 4 -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+              <h4 class="font-bold text-sm text-slate-800 mb-1">4. Etika Hak Cipta & Atribusi</h4>
+              <p class="text-xs text-slate-500 mb-3">Mencantumkan nama pencipta foto dan sumber referensi.</p>
+              <div class="flex gap-2" id="star-c4"></div>
+            </div>
+          </div>
+
+          <div class="bg-amber-100 p-4 rounded-xl border border-amber-300 flex justify-between items-center">
+            <span class="font-bold text-amber-950 text-sm">Rata-rata Nilai Bintang Keseluruhan:</span>
+            <span id="avg-stars" class="text-2xl font-black text-amber-800">0.0 / 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-MODUL 3C: KANVAS REFLEKSI STICKY NOTES -->
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md">
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Refleksi Berkesadaran PID #8</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Papan Refleksi Digital 3-2-1 (Sticky Notes Canvas)</h2>
+          <p class="text-slate-600 text-sm">Ketik pesan refleksi di bawah ini lalu tempelkan ke papan digital PID!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <input id="note-input-3" type="text" placeholder="3 Hal Baru yang Saya Pelajari..." class="p-3 border-2 border-amber-300 rounded-xl text-xs focus:outline-none focus:border-amber-500 bg-amber-50">
+          <input id="note-input-2" type="text" placeholder="2 Etika Penting yang Saya Terapkan..." class="p-3 border-2 border-blue-300 rounded-xl text-xs focus:outline-none focus:border-blue-500 bg-blue-50">
+          <input id="note-input-1" type="text" placeholder="1 Pertanyaan / Tantangan Tersisa..." class="p-3 border-2 border-emerald-300 rounded-xl text-xs focus:outline-none focus:border-emerald-500 bg-emerald-50">
+        </div>
+        
+        <button onclick="addStickyNote()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-sm shadow mb-6 touch-card">
+          ➕ Tempelkan Sticky Note Refleksi ke PID
+        </button>
+
+        <div id="sticky-canvas" class="bg-slate-900 p-6 rounded-2xl min-h-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Sticky notes default -->
+          <div class="bg-amber-200 text-amber-950 p-4 rounded-xl shadow-lg rotate-1 text-xs">
+            <span class="font-bold block mb-1">📌 3 Hal Baru:</span>
+            "Saya baru paham anatomi blog, cara membuat judul informatif, dan pentingnya lisensi gambar Creative Commons."
+          </div>
+          <div class="bg-blue-200 text-blue-950 p-4 rounded-xl shadow-lg -rotate-1 text-xs">
+            <span class="font-bold block mb-1">📌 2 Etika Penting:</span>
+            "Tidak boleh menyalin karya orang lain tanpa izin dan wajib mencantumkan tautan sumber referensi."
+          </div>
+          <div class="bg-emerald-200 text-emerald-950 p-4 rounded-xl shadow-lg rotate-2 text-xs">
+            <span class="font-bold block mb-1">📌 1 Tantangan:</span>
+            "Bagaimana cara memilih gambar berkualitas tinggi yang benar-benar bebas hak cipta untuk blog sekolah?"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: PANDUAN GURU ==================== -->
+    <section id="tab-panduan" class="tab-content hidden space-y-6">
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+        <div>
+          <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg text-xs uppercase">Pedoman Fasilitator</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Panduan Praktis Fasilitasi Guru di Kelas (Manajemen Waktu & PID)</h2>
+          <p class="text-slate-600 text-sm">Gunakan tabel alur ini untuk memandu aktivitas siswa selama 3 x 40 menit (120 Menit) pembelajaran PjBL.</p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-700 border-collapse">
+            <thead>
+              <tr class="bg-indigo-900 text-white text-xs">
+                <th class="p-3.5 rounded-tl-xl">Tahapan Pembelajaran</th>
+                <th class="p-3.5">Alokasi Waktu</th>
+                <th class="p-3.5">Peran Utama Guru</th>
+                <th class="p-3.5 rounded-tr-xl">Aktivitas Fitur PID</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 bg-slate-50">
+              <tr>
+                <td class="p-3.5 font-bold text-slate-900">Pendahuluan & Apersepsi</td>
+                <td class="p-3.5">15 Menit</td>
+                <td class="p-3.5">Fasilitator & Pemandu Diskusi</td>
+                <td class="p-3.5">Menjalankan <strong>Permainan 1 (Sort & Match)</strong> untuk memancing keaktifan murid di depan kelas.</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold text-slate-900">Memahami (Konsep & Anatomi)</td>
+                <td class="p-3.5">25 Menit</td>
+                <td class="p-3.5">Eksplorator & Pembimbing</td>
+                <td class="p-3.5">Membuka <strong>Fitur 2 (Hotspot Anatomi Blog)</strong> untuk membedah 6 unsur postingan blog yang baik.</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold text-slate-900">Mengaplikasi (PjBL & Etika)</td>
+                <td class="p-3.5">50 Menit</td>
+                <td class="p-3.5">Konsultan & Scaffolder Proyek</td>
+                <td class="p-3.5">Memandu <strong>Permainan 3 & 4</strong> (Detektif Informasi & Dilema Etika), lalu memantau <strong>Dashboard Project Roadmap</strong>.</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold text-slate-900">Merefleksi & Evaluasi</td>
+                <td class="p-3.5">30 Menit</td>
+                <td class="p-3.5">Moderator & Apresiator</td>
+                <td class="p-3.5">Mengoperasikan <strong>Roda Keberuntungan (Spin Wheel)</strong>, memfasilitasi <strong>Peer Review Rating</strong>, dan menutup dengan <strong>Kanvas Sticky Notes</strong>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- HOTSPOT MODAL -->
+  <div id="hotspot-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border-2 border-indigo-200 animate-in fade-in zoom-in duration-200">
+      <div class="flex justify-between items-center mb-4">
+        <span id="modal-badge" class="bg-amber-400 text-indigo-950 font-black px-3 py-1 rounded-xl text-xs">Unsur #1</span>
+        <button onclick="closeHotspot()" class="text-slate-400 hover:text-slate-700 text-xl font-bold p-1">✕</button>
+      </div>
+      <h3 id="modal-title" class="text-2xl font-black text-slate-900 mb-2">Judul Unsur Anatomi</h3>
+      <p id="modal-desc" class="text-slate-600 text-sm leading-relaxed mb-6">Penjelasan lengkap unsur anatomi blog...</p>
+      <button onclick="closeHotspot()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-sm shadow touch-card">
+        Paham & Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER PID -->
+  <footer class="bg-slate-900 text-slate-400 text-center py-4 text-xs border-t border-slate-800">
+    <p>© 2026 Media Pembelajaran Interaktif PID • Mata Pelajaran Informatika Kelas IX • SMP Negeri 1 Jepara</p>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
+      document.getElementById('clock').innerText = timeStr + ' WIB';
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Toggle Fullscreen
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Gagal masuk layar penuh: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+      }
+
+      // Re-render wheel if tab 3
+      if (tabId === 'tab-modul3') {
+        drawWheel();
+      }
+    }
+
+    /* ===================================================
+       GAME 1: SORT & MATCH LOGIC
+    =================================================== */
+    const initialCards = [
+      { id: 1, text: '5 Cara Efektif Penghematan Plastik di Sekolah', type: 'tips' },
+      { id: 2, text: 'Pengumuman Resmi Kelulusan Siswa Kelas IX 2026', type: 'berita' },
+      { id: 3, text: 'Kesan Pertama Saya Ikut Perkemahan Sabtu-Minggu', type: 'cerita' },
+      { id: 4, text: 'Panduan Praktis Membuat Akun Canva Edukasi', type: 'tips' },
+      { id: 5, text: 'Hasil Pertandingan Final Sepak Bola Antarkelas', type: 'berita' },
+      { id: 6, text: 'Refleksi Perjalanan Liburan Saya ke Museum Jepara', type: 'cerita' }
+    ];
+
+    let game1Cards = [...initialCards];
+    let selectedCardId = null;
+    let game1Score = 0;
+
+    function renderGame1() {
+      const pool = document.getElementById('cards-pool');
+      pool.innerHTML = '';
+
+      const unassigned = game1Cards.filter(c => !c.assigned);
+      if (unassigned.length === 0) {
+        pool.innerHTML = `<div class="col-span-full text-center text-emerald-700 font-bold p-4 bg-emerald-100 rounded-xl">
+          🎉 Luar Biasa! Semua kartu postingan berhasil diklasifikasikan dengan tepat!
+        </div>`;
+      } else {
+        unassigned.forEach(card => {
+          const isSelected = selectedCardId === card.id;
+          const cardEl = document.createElement('div');
+          cardEl.className = `p-3 rounded-xl border-2 cursor-pointer text-xs font-semibold shadow-sm transition touch-card ${
+            isSelected ? 'border-amber-500 bg-amber-100 ring-2 ring-amber-400' : 'border-slate-300 bg-white hover:border-indigo-400'
+          }`;
+          cardEl.innerText = card.text;
+          cardEl.onclick = () => selectCard(card.id);
+          pool.appendChild(cardEl);
+        });
+      }
+
+      // Render Basket items
+      ['berita', 'tips', 'cerita'].forEach(type => {
+        const basketContainer = document.getElementById(`basket-${type}`);
+        basketContainer.innerHTML = '';
+        const assignedCards = game1Cards.filter(c => c.assigned === type);
+        assignedCards.forEach(c => {
+          const item = document.createElement('div');
+          item.className = 'bg-white p-2 rounded-lg text-xs font-bold shadow-sm border border-slate-200 text-slate-800 flex justify-between items-center';
+          item.innerText = c.text;
+          basketContainer.appendChild(item);
+        });
+      });
+
+      document.getElementById('game1-score').innerText = `${game1Score} / ${initialCards.length}`;
+    }
+
+    function selectCard(id) {
+      selectedCardId = selectedCardId === id ? null : id;
+      renderGame1();
+    }
+
+    function dropToBasket(targetType) {
+      if (!selectedCardId) {
+        alert('Silakan sentuh salah satu kartu contoh postingan di bawah terlebih dahulu!');
+        return;
+      }
+
+      const card = game1Cards.find(c => c.id === selectedCardId);
+      if (card.type === targetType) {
+        card.assigned = targetType;
+        game1Score += 1;
+        selectedCardId = null;
+      } else {
+        alert('❌ Kurang tepat! Coba pertimbangkan kembali kategori yang sesuai.');
+      }
+      renderGame1();
+    }
+
+    function resetGame1() {
+      game1Cards = initialCards.map(c => ({ ...c, assigned: null }));
+      selectedCardId = null;
+      game1Score = 0;
+      renderGame1();
+    }
+    renderGame1();
+
+    /* ===================================================
+       FITUR 2: HOTSPOT ANATOMI BLOG
+    =================================================== */
+    const hotspotData = {
+      1: {
+        badge: 'Unsur #1: Visual Header / Banner',
+        title: 'Gambar Utama & Visual Pemikat',
+        desc: 'Gambar pemikat di bagian teratas blog berfungsi menarik perhatian visual pembaca pertama kali. Gambar harus relevan dengan isi artikel dan wajib berlisensi bebas atau mencantumkan hak cipta.'
+      },
+      2: {
+        badge: 'Unsur #2: Judul Postingan (Title)',
+        title: 'Judul yang Informatif & Bebas Clickbait',
+        desc: 'Judul memuat kata kunci utama pesan artikel. Judul harus jelas, menarik, informatif, serta jujur (tidak memanipulasi atau menjebak pembaca).'
+      },
+      3: {
+        badge: 'Unsur #3: Paragraf Pembuka (Lead)',
+        title: 'Kalimat Pemantik & Gambaran Singkat',
+        desc: 'Paragraf awal memuat kalimat pemantik berupa pertanyaan atau fakta singkat yang membangkitkan rasa ingin tahu pembaca untuk melanjutkan membaca.'
+      },
+      4: {
+        badge: 'Unsur #4: Isi Utama & Poin Pembahasan',
+        title: 'Sub-judul & Penggunaan Poin (Bulleted List)',
+        desc: 'Bagian isi menyajikan gagasan utama secara terstruktur. Penggunaan sub-judul dan poin bullet membuat tulisan mudah dipindai (scannable) oleh pembaca.'
+      },
+      5: {
+        badge: 'Unsur #5: Paragraf Penutup (Closing)',
+        title: 'Kesimpulan & Kesadaran Beraksi',
+        desc: 'Penutup berisi rangkuman pesan utama, ucapan terima kasih, atau ajakan beraksi (call-to-action) positif bagi para pembaca.'
+      },
+      6: {
+        badge: 'Unsur #6: Atribusi & Referensi',
+        title: 'Penghargaan Hak Cipta & Kredit Sumber',
+        desc: 'Bagian wajib etika digital: mencantumkan nama pembuat gambar serta pranala sumber informasi referensi untuk mencegah praktik plagiarisme.'
+      }
+    };
+
+    function openHotspot(id) {
+      const data = hotspotData[id];
+      document.getElementById('modal-badge').innerText = data.badge;
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-desc').innerText = data.desc;
+      document.getElementById('hotspot-modal').classList.remove('hidden');
+    }
+
+    function closeHotspot() {
+      document.getElementById('hotspot-modal').classList.add('hidden');
+    }
+
+    /* ===================================================
+       SIMULASI 3: DETEKTIF INFORMASI
+    =================================================== */
+    function investigate(articleKey, decision) {
+      const stampEl = document.getElementById(`stamp-${articleKey.toLowerCase()}`);
+      stampEl.classList.remove('hidden');
+
+      if (articleKey === 'A') {
+        if (decision === 'valid') {
+          stampEl.className = 'text-xs font-black px-3 py-1 rounded-lg border-2 uppercase bg-emerald-100 text-emerald-800 border-emerald-500';
+          stampEl.innerText = '✅ BENAR: TERVERIFIKASI VALID';
+        } else {
+          stampEl.className = 'text-xs font-black px-3 py-1 rounded-lg border-2 uppercase bg-rose-100 text-rose-800 border-rose-500';
+          stampEl.innerText = '❌ SALAH: ARTIKEL INI KREDIBEL';
+        }
+      } else if (articleKey === 'B') {
+        if (decision === 'hoax') {
+          stampEl.className = 'text-xs font-black px-3 py-1 rounded-lg border-2 uppercase bg-emerald-100 text-emerald-800 border-emerald-500';
+          stampEl.innerText = '✅ BENAR: DETEKSI HOAKS TEPAT!';
+        } else {
+          stampEl.className = 'text-xs font-black px-3 py-1 rounded-lg border-2 uppercase bg-rose-100 text-rose-800 border-rose-500';
+          stampEl.innerText = '❌ SALAH: ARTIKEL INI ADALAH HOAKS!';
+        }
+      }
+    }
+
+    /* ===================================================
+       KUIS 4: DILEMA ETIKA DIGITAL
+    =================================================== */
+    function answerEtika(choice) {
+      const feedback = document.getElementById('etika-feedback');
+      feedback.classList.remove('hidden', 'bg-rose-100', 'text-rose-900', 'bg-emerald-100', 'text-emerald-900');
+
+      if (choice === 'B') {
+        feedback.classList.add('bg-emerald-100', 'text-emerald-900', 'border', 'border-emerald-300');
+        feedback.innerHTML = `<strong>🎉 Jawaban Tepat (Sesuai Etika Digital)!</strong><br>
+        Selalu minta izin atau gunakan gambar berlisensi bebas (seperti Creative Commons) dan cantumkan atribusi pencipta. Ini menjaga reputasi jejak digital positif kita dan menghargai hak cipta orang lain.`;
+      } else {
+        feedback.classList.add('bg-rose-100', 'text-rose-900', 'border', 'border-rose-300');
+        feedback.innerHTML = `<strong>❌ Pilihan Kurang Beretika.</strong><br>
+        Mengunduh karya tanpa izin atau mengklaim hasil karya orang lain merupakan tindakan plagiarisme yang melanggar etika kewargaan digital.`;
+      }
+    }
+
+    /* ===================================================
+       PROJECT ROADMAP CHECKLIST
+    =================================================== */
+    function toggleStep(num) {
+      const stepEl = document.getElementById(`step-${num}`);
+      const checkEl = document.getElementById(`check-${num}`);
+
+      const isDone = stepEl.classList.contains('bg-emerald-50');
+      if (!isDone) {
+        stepEl.classList.remove('bg-slate-50', 'border-slate-200');
+        stepEl.classList.add('bg-emerald-50', 'border-emerald-400');
+        checkEl.classList.remove('border-slate-300');
+        checkEl.classList.add('bg-emerald-600', 'border-emerald-600');
+        checkEl.innerText = '✓';
+      } else {
+        stepEl.classList.remove('bg-emerald-50', 'border-emerald-400');
+        stepEl.classList.add('bg-slate-50', 'border-slate-200');
+        checkEl.classList.remove('bg-emerald-600', 'border-emerald-600');
+        checkEl.classList.add('border-slate-300');
+        checkEl.innerText = '';
+      }
+    }
+
+    /* ===================================================
+       PERMAINAN 6: RODA KEBERUNTUNGAN (SPIN WHEEL)
+    =================================================== */
+    const groups = ['Kelompok 1', 'Kelompok 2', 'Kelompok 3', 'Kelompok 4', 'Kelompok 5', 'Kelompok 6'];
+    const colors = ['#4f46e5', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'];
+    let currentAngle = 0;
+    let isSpinning = false;
+
+    function drawWheel() {
+      const canvas = document.getElementById('wheelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numOptions = groups.length;
+      const arcSize = (2 * Math.PI) / numOptions;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numOptions; i++) {
+        const angle = currentAngle + i * arcSize;
+        ctx.beginPath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.moveTo(170, 170);
+        ctx.arc(170, 170, 160, angle, angle + arcSize);
+        ctx.lineTo(170, 170);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Draw Text
+        ctx.save();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px "Plus Jakarta Sans", sans-serif';
+        ctx.translate(170 + Math.cos(angle + arcSize / 2) * 100, 170 + Math.sin(angle + arcSize / 2) * 100);
+        ctx.rotate(angle + arcSize / 2 + Math.PI / 2);
+        ctx.fillText(groups[i], -ctx.measureText(groups[i]).width / 2, 0);
+        ctx.restore();
+      }
+
+      // Center Pin
+      ctx.beginPath();
+      ctx.arc(170, 170, 25, 0, 2 * Math.PI);
+      ctx.fillStyle = '#0f172a';
+      ctx.fill();
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+    }
+
+    function spinWheel() {
+      if (isSpinning) return;
+      isSpinning = true;
+
+      const spinAngle = Math.random() * 2000 + 3000;
+      const startAngle = currentAngle;
+      const duration = 4000;
+      let startTime = null;
+
+      function animateWheel(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const easeOut = 1 - Math.pow(1 - progress / duration, 3);
+        currentAngle = startAngle + (spinAngle * Math.PI / 180) * easeOut;
+
+        drawWheel();
+
+        if (progress < duration) {
+          requestAnimationFrame(animateWheel);
+        } else {
+          isSpinning = false;
+          calculateWinner();
+        }
+      }
+
+      requestAnimationFrame(animateWheel);
+    }
+
+    function calculateWinner() {
+      const numOptions = groups.length;
+      const arcSize = (2 * Math.PI) / numOptions;
+      // Normalized angle relative to top pointer (-90 deg or 1.5 * PI)
+      let normalizedAngle = (currentAngle + Math.PI / 2) % (2 * Math.PI);
+      if (normalizedAngle < 0) normalizedAngle += 2 * Math.PI;
+
+      const winnerIndex = numOptions - 1 - Math.floor(normalizedAngle / arcSize);
+      const winnerName = groups[winnerIndex % numOptions];
+
+      document.getElementById('winner-display').innerText = winnerName;
+      document.getElementById('winner-sub').innerText = 'Silakan perwakilan maju ke PID untuk melakukan presentasi produk blog!';
+    }
+
+    /* ===================================================
+       EVALUASI 7: PEER REVIEW RATING BINTANG
+    =================================================== */
+    const starRatings = { c1: 0, c2: 0, c3: 0, c4: 0 };
+
+    function renderStars() {
+      ['c1', 'c2', 'c3', 'c4'].forEach(key => {
+        const container = document.getElementById(`star-${key}`);
+        container.innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+          const starBtn = document.createElement('button');
+          starBtn.className = `text-2xl transition touch-card ${
+            i <= starRatings[key] ? 'text-amber-400 scale-110' : 'text-slate-300'
+          }`;
+          starBtn.innerText = '★';
+          starBtn.onclick = () => setRating(key, i);
+          container.appendChild(starBtn);
+        }
+      });
+
+      const values = Object.values(starRatings);
+      const nonZero = values.filter(v => v > 0);
+      const avg = nonZero.length > 0 ? (nonZero.reduce((a, b) => a + b, 0) / nonZero.length).toFixed(1) : '0.0';
+      document.getElementById('avg-stars').innerText = `${avg} / 5.0`;
+    }
+
+    function setRating(key, val) {
+      starRatings[key] = val;
+      renderStars();
+    }
+    renderStars();
+
+    /* ===================================================
+       REFLEKSI 8: STICKY NOTES CANVAS
+    =================================================== */
+    function addStickyNote() {
+      const input3 = document.getElementById('note-input-3').value.trim();
+      const input2 = document.getElementById('note-input-2').value.trim();
+      const input1 = document.getElementById('note-input-1').value.trim();
+
+      if (!input3 && !input2 && !input1) {
+        alert('Silakan isi setidaknya satu kolom refleksi!');
+        return;
+      }
+
+      const canvas = document.getElementById('sticky-canvas');
+      const colors = [
+        'bg-amber-200 text-amber-950',
+        'bg-blue-200 text-blue-950',
+        'bg-emerald-200 text-emerald-950',
+        'bg-purple-200 text-purple-950'
+      ];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+      const note = document.createElement('div');
+      note.className = `${randomColor} p-4 rounded-xl shadow-lg text-xs space-y-1.5 animate-in zoom-in duration-300`;
+      note.innerHTML = `
+        ${input3 ? `<div><span class="font-bold">📌 3 Hal Baru:</span> "${input3}"</div>` : ''}
+        ${input2 ? `<div><span class="font-bold">📌 2 Etika:</span> "${input2}"</div>` : ''}
+        ${input1 ? `<div><span class="font-bold">📌 1 Tantangan:</span> "${input1}"</div>` : ''}
+      `;
+
+      canvas.appendChild(note);
+
+      // Clear Inputs
+      document.getElementById('note-input-3').value = '';
+      document.getElementById('note-input-2').value = '';
+      document.getElementById('note-input-1').value = '';
+    }
+
+    // Initialize wheel on load
+    window.onload = () => {
+      drawWheel();
+    };
+  </script>
+</body>
+</html>
